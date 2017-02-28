@@ -1,0 +1,118 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+/*
+ * Assumption - Since the function takes 2 2 inputs 
+ * @param - 1 million unique English words - 35 characters or less
+ * @param list of string characters (string) 
+ * It is natural for me to think for the fastest execution time to find the possible anagrams
+ * for each of the string in the list ,i.e - 2nd param to be stored in a data structure that gives
+ * faster addition and retrieval times.
+ * 
+ * I found a good dictionary of unique english words on net and used it for testing. The package contains the dictionary as well.
+ * 
+ * Below is the classic code where the values are returned for each string in  the 2nd param.
+ * 
+ * */
+public class AnagramsClassic {
+	// stores the possible anagrams of the word from the dictionary as list of
+	// strings where key being a string, i.e the word from dictionary.
+	private Map<String, List<String>> bank;
+	private static final String FILE_PATH = System.getProperty("user.dir") + "\\src\\dictionary";
+
+	public AnagramsClassic() {
+		this.bank = new HashMap<String, List<String>>();
+	}
+
+	private void textRead() {
+		try {
+			File f = new File(AnagramsClassic.FILE_PATH);
+			BufferedReader br;
+			if (AnagramsClassic.FILE_PATH.compareTo("") == 0 || AnagramsClassic.FILE_PATH == null) {
+				throw new IllegalArgumentException("File Path cant be null or empty");
+			} else if (!f.exists()) {
+				throw new FileNotFoundException("File not found at " + AnagramsClassic.FILE_PATH);
+			}
+			br = new BufferedReader(new FileReader(AnagramsClassic.FILE_PATH));
+			String currWord;
+			while ((currWord = br.readLine()) != null) {
+				this.fillDict(currWord);
+			}
+			br.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	private void fillDict(String word) {
+		// Since empty string could be anagrams of themselves
+		if (word.length() == 0 || word == null) {
+			if (this.bank.containsKey("")) {
+				List<String> curr = this.bank.get("");
+				curr.add(word);
+				this.bank.put("", curr);
+			} else {
+				List<String> curr = new LinkedList<String>();
+				curr.add("");
+				this.bank.put("", curr);
+			}
+		} else {
+			// the word are to be sorted and added to the key.
+			String key = this.generateKey(word);
+			if (this.bank.containsKey(key)) {
+				List<String> curr = this.bank.get(key);
+				curr.add(word);
+				this.bank.put(key, curr);
+			} else {
+				List<String> curr = new LinkedList<String>();
+				curr.add(word);
+				this.bank.put(key, curr);
+			}
+		}
+
+	}
+
+	private List<String> returnAnagrams(String word) {
+		if (word.length() == 0 || word == null) {
+			return this.bank.get("");
+		} else {
+			return this.bank.get(this.generateKey(word));
+		}
+	}
+
+	private String generateKey(String word) {
+		// Since many words may be anagrams of each other
+		// the best way to go around it is to sort the words as per alphabets
+		// then store the key as the sorted alphabets, and the words to be
+		// anagrams
+		// of those words.
+
+		// Dont let client side handle nulls/empty string
+		if (word.length() == 0 || word == null) {
+			return new String();
+		} else {
+			char[] curr_arr = word.toLowerCase().toCharArray();
+			Arrays.sort(curr_arr);
+			return Arrays.toString(curr_arr);
+		}
+	}
+
+	public static void main(String[] args) {
+		AnagramsClassic o = new AnagramsClassic();
+		o.textRead();
+		List<String> val = o.returnAnagrams("alter");
+		System.out.print("Anagrams = ");
+		for (String s : val) {
+			System.out.print(s + " ");
+		}
+		System.out.println();
+	}
+}

@@ -1,0 +1,126 @@
+package TreeAndHeap;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Scanner;
+import java.util.Stack;
+
+public class IsBST {
+	Node n = new Node(3);
+
+
+
+	public IsBST(){}
+	public  void Reflection() throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		Method m = n.getClass().getMethod("doSome",null);
+		m.invoke(m,null);
+	}
+
+	boolean checkNode(Node node) {
+		boolean retVal = false;
+		if (node.right == null && node.left == null) {
+			retVal = true;
+		} else if (node.right == null) {
+			if (node.left.data < node.data) {
+				retVal = true;
+			}
+		} else if (node.left == null) {
+			if (node.right.data > node.data) {
+				retVal = true;
+			}
+		} else {
+			if (node.left.data < node.data && node.right.data > node.data) {
+				retVal = true;
+			}
+		}
+		return retVal;
+	}
+
+	boolean checkBST(Node root) {
+		boolean retVal = true;
+		Stack<Node> s = new Stack<Node>();
+		s.push(root);
+		while (!s.isEmpty() && retVal) {
+			Node curr = s.pop();
+			if (curr.left != null) {
+				s.push(curr.left);
+
+			}
+			if (curr.right != null) {
+				s.push(curr.right);
+			}
+			retVal = checkNode(curr);
+		}
+
+		return retVal;
+	}
+
+	public Node sortedArrayToBST(int arr[], int start, int end) {
+
+		/* Base Case */
+		if (start > end) {
+			return null;
+		}
+
+		/* Get the middle element and make it root */
+		int mid = (start + end) / 2;
+		Node node = new Node(arr[mid]);
+
+		/*
+		 * Recursively construct the left subtree and make it left child of root
+		 */
+		node.left = sortedArrayToBST(arr, start, mid - 1);
+
+		/*
+		 * Recursively construct the right subtree and make it right child of
+		 * root
+		 */
+		node.right = sortedArrayToBST(arr, mid + 1, end);
+
+		return node;
+	}
+	
+	public boolean isBalanced(Node root,Height h){
+		if(root == null){
+			return true;
+		}
+		Height lh = new Height();
+		Height rh = new Height();
+		boolean l = isBalanced(root.left,lh);
+		boolean r = isBalanced(root.right,rh);
+		h.height = (Math.max(lh.height, rh.height))+1;
+		if(Math.abs(lh.height-rh.height)>=2){
+			return false;
+		}
+		//System.out.println("The max height of the tree = "+h.height);
+		return (l && r);
+	}
+	
+	public int height(Node n){
+		if(n == null){
+			return 0;
+		}
+		else{
+			return (1+Math.max(height(n.left),height(n.right)));
+		}
+	}
+	
+	
+	
+	
+	public static void main(String[] args) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+//		Scanner s = new Scanner(System.in);
+//		int size = Integer.parseInt(s.nextLine());
+//		String arr = s.nextLine();
+//		String[] arr_ = arr.split("\\s+");
+//		int[] input = new int[arr_.length];
+//		for(int i = 0;i< arr_.length;i++){
+//			input[i]=Integer.parseInt(arr_[i]);
+//		}
+		IsBST obj = new IsBST();
+//		System.out.println("IS BST = "+ obj.checkBST(obj.sortedArrayToBST(input, 0, input.length-1)));
+//		System.out.println("Is Balanced = "+obj.isBalanced(obj.sortedArrayToBST(input, 0, input.length-1), new Height()));
+		
+		obj.Reflection();
+	}
+
+}
