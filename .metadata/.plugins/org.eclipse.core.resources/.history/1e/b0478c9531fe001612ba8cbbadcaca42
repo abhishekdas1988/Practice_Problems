@@ -1,0 +1,29 @@
+package ListAndQueue;
+
+public class DoubleListIntoTree {
+	Node start;
+	int size;
+	public void createLinkedList(int[] a){
+		this.size = a.length;
+		Node previous = new Node(a[0]);
+		for(int i =0;i< a.length;i++){
+			Node curr = new Node(a[i]);
+			if(i==0){
+				start = curr;
+				previous = start;
+				
+			}
+			else if(i == a.length-1){
+				curr.next = null;
+			}
+			else{
+				curr.previous = previous;
+				previous.next = curr;
+				previous = curr;
+			}
+		}
+	}
+	
+	public 
+
+}

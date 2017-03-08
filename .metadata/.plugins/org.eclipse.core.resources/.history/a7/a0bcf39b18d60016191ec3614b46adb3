@@ -1,0 +1,49 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+
+	static String[] braces(String[] values) {
+		String s = "{[()]}";
+		int number_input = values.length;
+		String[] ret = new String[number_input];
+		for (int i = 0; i < number_input; i++) {
+			System.out.println("ROUND "+i+"-------------------------------");
+			if(number_input%2!=0){
+				ret[i]="NO";
+				continue;
+			}
+			else{
+				Map<String, Integer> store = new HashMap<String, Integer>();
+				for(int j = 0;j<values[i].length();j++){
+					if(store.containsKey(values[i].charAt(j))){
+						System.out.println("Contains "+values[i].charAt(j));
+						int val = store.get(values[i].charAt(j));
+						val = val+1;
+						store.put(Character.toString(values[i].charAt(j)), val);
+					}
+					else{
+						System.out.println("Putting new val "+values[i].charAt(j));
+						store.put(Character.toString(values[i].charAt(j)),1);
+					}
+				}
+				for(String key: store.keySet()){
+					if(store.get(key)%2!=0){
+						ret[i]="NO";
+						continue;
+					}
+				}
+
+			}
+		}
+		return ret;
+	}
+	public static void main(String [] args){
+		Solution s = new Solution();
+		String[] val = {"{}(){}","{}})("};
+		String[] ret = s.braces(val);
+		for(int i = 0;i<ret.length;i++){
+			System.out.println("i ="+ ret[i]);
+		}
+	}
+}

@@ -1,0 +1,49 @@
+
+public class PhoneBookProblem {
+	String[] dict = { "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+	String[] solution;
+
+	public void createCombination(String input) {
+		// find the size of the output.
+		int total_size = 1;
+		for (int i = 0; i < input.length(); i++) {
+			total_size = total_size * (dict[Integer.parseInt(Character.toString(input.charAt(i)))]).length();
+		}
+		solution = new String[total_size];
+		for (int i = 0; i < input.length(); i++) {
+			int char_repeat_freq =(int) Math.pow((double)dict[Integer.parseInt(Character.toString(input.charAt(i)))].length(),(double) Math.abs(i-input.length()-1));
+			System.out.println("Filling "+ dict[i]+ "frequency "+ char_repeat_freq);
+			this.fillCharacter(char_repeat_freq, dict[Integer.parseInt(Character.toString(input.charAt(i)))]);
+		}
+	}
+	public void fillCharacter(int freq,String ch){
+		int count = 0;
+		int index = 0;
+		for(int i=0;i<solution.length;i++){
+			if(count == freq){
+				index++;
+				count = 0;
+				solution[i] = solution[i].concat(Character.toString(ch.charAt(index)));
+				count++;
+
+				
+			}
+			else{
+				solution[i] = solution[i].concat(Character.toString(ch.charAt(index)));
+				count++;
+			}
+			if(index== ch.length()-1){
+				index =0;
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		PhoneBookProblem s = new PhoneBookProblem();
+		s.createCombination("239");
+		for(int i=0;i<s.solution.length;i++){
+			System.out.println(s.solution[i]);
+		}
+	}
+
+}

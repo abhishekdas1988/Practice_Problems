@@ -1,0 +1,42 @@
+package TreeAndHeap;
+import java.util.*;
+public class LeastCommonAncestor {
+	boolean a_found = false;
+	boolean b_found = false;
+	Set<Node> common = new HashSet<Node>();
+	public Node lca(Node a, Node b){
+		
+		while(a_found == false || b_found == false){
+			if(a_found ==false){
+				
+			}
+			if(b_found == false){
+				
+			}
+		}
+		return null;
+	}
+	
+	public void findNode(Node root,Node a){
+		Node curr = root;
+		if(curr == a){
+			return;
+		}
+		else if(curr == null){
+			// node doesnot exist
+			return;
+		}
+		else{
+			common.add(root);
+			if(a.data <= root.data){
+				root = root.left;
+				findNode(root,a);
+			}
+			else{
+				root = root.right;
+				findNode(root,a);
+			}
+		}
+	}
+
+}

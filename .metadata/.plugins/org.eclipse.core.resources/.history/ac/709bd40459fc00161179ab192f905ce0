@@ -1,0 +1,22 @@
+import java.util.List;
+import java.util.Map;
+
+/*
+ * Assumption - Since the function takes 2 2 inputs 
+ * @param - 1 million unique English words - 35 characters or less
+ * @param list of string characters (string) 
+ * It is natural for me to think for the fastest execution time to find the possible anagrams
+ * for each of the string in the list ,i.e - 2nd param to be stored in a data structure that gives
+ * faster addition and retrieval times.
+ * 
+ * I found a good dictionary of unique english words on net and used it for testing. The package contains the dictionary as well.
+ * 
+ * Below is the classic code where the values are returned for each string in  the 2nd param.
+ * 
+ * */
+public class AnagramsClassic {
+	// stores the possible anagrams of the word from the dictionary as list of strings where key being a string, i.e the word from dictionary.
+	private Map<String,List<String>> bank;
+	
+
+}

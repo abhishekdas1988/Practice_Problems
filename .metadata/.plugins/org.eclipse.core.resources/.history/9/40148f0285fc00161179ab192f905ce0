@@ -1,0 +1,19 @@
+import java.util.Set;
+import java.util.TreeSet;
+
+public class Node {
+	private String sval;
+	private int slen;
+	private Set<String> anagram;
+	
+	public Node(String sval){
+		this.sval = sval;
+		this.slen = sval.length();
+		this.anagram = new TreeSet<String>();
+	}
+	
+	public void add(String word){
+		this.anagram.add(word);
+	}
+
+}

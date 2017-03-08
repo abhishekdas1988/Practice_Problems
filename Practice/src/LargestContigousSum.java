@@ -20,7 +20,7 @@ public class LargestContigousSum {
 		for(int i = 0;i< input.length;i++){
 			curr_total = Math.max(input[i], curr_total+input[i]);
 			max_so_far =Math.max(curr_total, max_so_far);
-			System.out.println("Curr_total = "+curr_total+"  Max_total_so_far = "+max_so_far);
+			//System.out.println("Curr_total = "+curr_total+"  Max_total_so_far = "+max_so_far);
 			if(curr_total!=previous_max_so_far && curr_total> previous_max_so_far){
 				indices.add(i);
 			}
@@ -29,7 +29,7 @@ public class LargestContigousSum {
 		return max_so_far;
 	}
 	public static void main(String[] args){
-		int [] a = {-2, -5, 6, -2, -3, 1, 5, -6};
+		int [] a = { 1, 2, 3,4};
 		LargestContigousSum s = new LargestContigousSum();
 		System.out.println(" Max contigous sum = "+ s.solution(a));
 		for(Integer i:s.indices){

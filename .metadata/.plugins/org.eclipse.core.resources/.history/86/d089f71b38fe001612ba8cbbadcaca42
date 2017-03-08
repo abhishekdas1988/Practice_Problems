@@ -1,0 +1,57 @@
+package ListAndQueue;
+
+public class DoubleListIntoTree {
+	Node start;
+	int size;
+	Node root;
+	public void createLinkedList(int[] a){
+		this.size = a.length;
+		Node previous = new Node(a[0]);
+		for(int i =0;i< a.length;i++){
+			Node curr = new Node(a[i]);
+			if(i==0){
+				start = curr;
+				previous = start;
+				
+			}
+			else if(i == a.length-1){
+				curr.next = null;
+			}
+			else{
+				curr.previous = previous;
+				previous.next = curr;
+				previous = curr;
+			}
+		}
+	}
+	
+	public Tnode createBinaryTree(Node start){
+		int mid = size/2;
+		Node curr = start;
+		for(int i =0;i<mid;i++){
+			curr = start.next;
+		}
+		TNode root = new TNode((int)curr.val);
+		
+
+		
+				
+				return null;
+	}
+	
+	public TNode BuildNode(Node n){
+		TNode retVal = new TNode((int)n.val);
+		retVal.left = new TNode((int)n.previous.val);
+		
+		TNode treeCurr = retVal.left;
+		Node listCurr = n;
+		while(listCurr.previous!= null){
+			treeCurr.left = new TNode((int)n.previous.val);
+			listCurr = listCurr.previous;
+			treeCurr = treeCurr.left;
+			
+		}
+	}
+	
+
+}

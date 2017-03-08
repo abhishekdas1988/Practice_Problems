@@ -1,0 +1,35 @@
+class Solution {
+    public int solution(String S) {
+        // write your code in Java SE 8
+    	return 0;
+    }
+    public void logProcessor(String S){
+    	// Function takes the string and returns a key value pair
+    	// where key is the phone number and value is the time in sec
+    	// for the call duration
+    	
+    	// First split the given string as per the end of line character
+    	String []entries = S.split("\\r?\\n");
+//    	for(String s:entries){
+//    		System.out.println(s);
+//    	}
+    	for(String s:entries){
+    		String[] current = s.split(",");
+    		System.out.println(this.secConverter(current[0]));
+    		
+    	}
+    }
+
+    public int secConverter(String S){
+    	String[] time = S.split(":");
+    	return (3600*Integer.parseInt(time[0])+60*Integer.parseInt(time[1])+Integer.parseInt(time[2]));
+    	
+    }
+    public static void main(String[] args){
+    	String S = "00:01:07,400-234-090\n"+
+   "00:05:01,701-080-080\n"+
+   "00:05:00,400-234-090";
+    	Solution s = new Solution();
+    	s.logProcessor(S);
+    }
+}

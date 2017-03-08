@@ -1,7 +1,9 @@
 
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 public class ThreadRunnerThread extends Thread {
 
@@ -49,5 +51,9 @@ public class ThreadRunnerThread extends Thread {
 		int i = 0;
 		for(i=0;i<10;i++){}
 		System.out.println(i);
+		LinkedList<String> a = new LinkedList<String>();
+		Iterator<String> it = a.iterator();
+		Vector <String> x = new Vector<String>();
+		
 	}
 }

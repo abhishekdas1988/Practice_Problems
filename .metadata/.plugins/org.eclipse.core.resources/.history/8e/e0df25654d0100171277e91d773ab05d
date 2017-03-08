@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+
+public class Solution2 {
+	Map<String,List<Integer>>docStore = new TreeMap<String,List<Integer>>();
+  public static void missingDoc(String name,int id){
+	  if()
+	  
+	  
+	  
+  }
+    public static void main(String args[] ) throws Exception {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    Solution2 o = new Solution2();
+    	Scanner s  = new Scanner(System.in);
+    String line;
+    while(s.hasNext()){
+    	line = s.next();
+    	String[] _line = line.split(",");
+    	//2 = docType, 3 id
+    	Solution2.missingDoc(_line[2],Integer.parseInt(_line[2]));
+    }
+    
+    
+    
+    }
+}

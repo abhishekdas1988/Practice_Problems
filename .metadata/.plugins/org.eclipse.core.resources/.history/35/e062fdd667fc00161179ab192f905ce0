@@ -1,0 +1,19 @@
+import java.util.LinkedList;
+import java.util.List;
+
+public class Node {
+	private String sval;
+	private int slen;
+	private List<String> anagram;
+	
+	public Node(String sval){
+		this.sval = sval;
+		this.slen = sval.length();
+		this.anagram = new LinkedList<String>();
+	}
+	
+	public void add(String word){
+		this.anagram.add(word);
+	}
+
+}

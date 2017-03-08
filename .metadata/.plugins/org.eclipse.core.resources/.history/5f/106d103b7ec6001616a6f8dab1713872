@@ -1,0 +1,164 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.Stack;
+
+/*
+ * https://www.hackerrank.com/challenges/balanced-forest
+ * Greg received an -node tree as a graduation gift, where each node  contains  coins. He wants to insert exactly one new node, , into the tree using the following process:
+
+Select a node, , where .
+Create a new edge connecting node  to a new node, .
+Add  coins to node  (this can be any non-negative integer).
+Now that Greg's tree has  nodes, he wants to cut two of its edges to create a forest of  trees where each tree contains an equal number of coins. If such a configuration is possible, he calls it a balanced forest.
+
+For each tree Greg receives as a gift, determine the minimum value of  such that the tree can be split into a balanced forest (meaning that each of the forest's three trees have the same number of coins); if no  exists that enables Greg to create a balanced forest, print  instead.
+
+Input Format
+
+The first line contains a single integer, , denoting the number of trees gifted to Greg. The subsequent lines describe each query in the following format:
+
+The first line contains an integer, , denoting the number of nodes in the tree.
+The second line contains  space-separated integers describing the respective values of , where each  denotes the number of coins at node .
+Each line  of the  subsequent lines contains two space-separated integers,  and  (where ), describing edge  connecting nodes  and .
+Note: It is guaranteed that each query forms a valid undirected tree.
+
+Constraints
+
+Subtasks
+
+For  of the maximum score:
+
+For  of the maximum score:
+
+Output Format
+
+For each query, print the minimum value of  on a new line; if no such value exists, print  instead.
+
+Sample Input
+
+2
+5
+1 2 2 1 1
+1 2
+1 3
+3 5
+1 4
+3
+1 3 5
+1 3
+1 2
+Sample Output
+
+2
+-1
+Explanation
+
+We perform the following two queries:
+
+The tree initially looks like this: 
+q1 initial tree
+Greg can add a new node  with  coins and create a new edge connecting nodes  and . Then he cuts the edge connecting nodes  and  and the edge connecting nodes  and . We now have a three-tree forest, where each tree has  coins. 
+q1 cut tree
+In the second query, it's impossible to add a node in such a way that we can split the tree into a three-tree forest where each tree has an equal number of coins, so we print .*/
+
+public class NTree {
+	ArrayList<String> input = new ArrayList<String>();
+	HashMap<String, Integer> config = new HashMap<String,Integer>();
+	ArrayList<Integer> weight;
+	public void inputReader(){
+		Scanner s  = new Scanner(System.in);
+		Integer numTrees = Integer.parseInt(s.nextLine());
+		input.add(numTrees.toString());
+		for (int i = 0;i< numTrees;i++){
+			Integer nodes = Integer.parseInt(s.nextLine());
+			input.add(nodes.toString());
+			for(int j = 0;j<nodes;j++){
+				input.add(s.nextLine());
+			}
+		}
+		System.out.println("End");
+		
+	}
+	public void createTree(){
+		int j = 1;
+		for(int i = 0;i<Integer.parseInt(input.get(0));i++){
+			this.weight= new ArrayList<Integer>();
+			System.out.println(" INT i = "+i);
+			int nodes = Integer.parseInt(input.get(j));
+			System.out.println(" For - "+ j);
+			j++;
+			String[] weight =input.get(j).split(" ");
+			for(int m = 0;m< weight.length;m++){
+				this.weight.add(m,Integer.parseInt(weight[m]));
+			}
+			
+			j++;
+
+			ArrayList<String> in = new ArrayList<String>();
+			while(j<input.size() && input.get(j).contains(" ")){
+				in.add(input.get(j));
+				System.out.println(" While - "+ j);
+				j++;
+			}
+			this.Solution(nodes, in,this.weight);
+		}
+			
+	}
+	public void Solution(int nodes, ArrayList<String> edges,ArrayList<Integer> weight){
+		//System.out.println("Nodes = "+nodes+" Edges = " + edges.size()+" Weight "+weight);
+		// Constructing the edge array and assigning it to -1
+		int[][] ed = new int[nodes][nodes];
+		for(int i = 0;i<nodes;i++){
+			for(int j = 0;j<nodes;j++){
+				ed[i][j] = -1;
+			}
+		}
+		for(String s:edges){
+			//System.out.println(" String = "+ s);
+			String[] str = s.split(" ");
+			ed[Integer.parseInt(str[0])-1][Integer.parseInt(str[1])-1] = 1;
+			//ed[Integer.parseInt(str[1])-1][Integer.parseInt(str[0])-1] = 1;
+		}
+		for(int i = 0;i<ed.length;i++){
+			for(int j = 0;j<ed[i].length;j++){
+				System.out.print(String.format("%2d",ed[i][j])+" ");
+			}
+			System.out.println();
+		}
+		this.generateConfigs("0", 1, ed);
+		for(String s : this.config.keySet()){
+			System.out.println("Key "+ s + " ===> Weight = "+this.config.get(s));
+		}
+		
+		
+	}
+	public void generateConfigs(String initialNode, Integer currentWeight,int[][] edges){
+		Stack<String> s = new Stack<String>();
+		if(!this.config.containsKey(initialNode)){
+			this.config.put(initialNode, currentWeight);
+		}
+		s.push(initialNode);
+		while(!s.isEmpty()){
+			String start = s.pop();
+			String[] startArr = start.split(" ");
+				// From the last element in the array find all the possible steps and update
+			String currentString = startArr[startArr.length-1];
+			for(int i = 0;i<edges[Integer.parseInt(currentString)].length;i++){
+				if(edges[Integer.parseInt(currentString)][i]!=-1){
+					this.generateConfigs((initialNode+" "+new Integer(i).toString()), (currentWeight+edges[Integer.parseInt(currentString)][i]), edges);
+				}
+			}
+			
+		}
+		
+	}
+	
+	public static void main(String[] args){
+		NTree obj = new NTree();
+		//obj.inputReader();
+		//obj.createTree();
+		System.out.println(3+Integer.parseInt("2"));
+	}
+
+}

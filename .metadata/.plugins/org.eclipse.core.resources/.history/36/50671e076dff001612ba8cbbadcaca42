@@ -1,0 +1,14 @@
+import java.util.*;
+
+// Tom starts at 0,0 in the maze, has to go to a location (x,y) to meet jery, valid 
+// moves are -> , <-,^ or v on block at a time, he can move through 0, 1 means block
+// 2 means cheese.
+// Min path required for tom to meet Jery with max cheese.
+public class TomAndJeryMinPath {
+	static Map<String,List<String>> pos_moves = new HashMap<String,List<String>>();
+	public void  calculatePath(int[][] arr, int row, int col){
+		
+		for(int )
+	}
+
+}

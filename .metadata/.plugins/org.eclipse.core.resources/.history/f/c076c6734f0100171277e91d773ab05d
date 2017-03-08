@@ -1,0 +1,66 @@
+import java.util.*;
+
+public class Solution2 {
+	static Map<String, Set<Integer>> docStore = new TreeMap<String, Set<Integer>>();
+	static Set<Integer> applications = new HashSet<Integer>();
+
+	public static void missingDoc(String name, int id) {
+		applications.add(id);
+		if (docStore.containsKey(name)) {
+			docStore.get(name).add(id);
+		} else {
+			docStore.put(name, new HashSet<Integer>());
+		}
+
+	}
+
+	public static void printMissingDocs() {
+		Set<Integer> defensiveCopy;
+		for (String s : docStore.keySet()) {
+			defensiveCopy = new HashSet<Integer>(applications);
+			defensiveCopy.removeAll(docStore.get(s));
+			System.out.println(s);
+			for (Integer val : defensiveCopy) {
+				System.out.print(val + " ");
+			}
+		}
+	}
+
+	public static void main(String args[]) throws Exception {
+		/*
+		 * Enter your code here. Read input from STDIN. Print output to STDOUT
+		 */
+		Solution2 o = new Solution2();
+		Scanner s = new Scanner(System.in);
+		String line;
+		int app_id_index = 0;
+		int doc_type_index = 0;
+		line = s.nextLine();
+		System.out.println("Line = ");
+		System.out.println(line);
+		String[] _lines = line.split(",");
+		// find the index of applicationID and docType
+		for (int i = 0; i < _lines.length; i++) {
+			if (_lines[i].compareToIgnoreCase("applicationID") == 0) {
+				app_id_index = i;
+			} else if (_lines[i].compareToIgnoreCase("docType") == 0) {
+				doc_type_index = i;
+			} else {
+				// Do nothing
+			}
+		}
+		System.out.println("doc_type_index = "+doc_type_index+" app_id_index = " + app_id_index);
+		String[] _line;
+		while (s.hasNext()) {
+			line = s.nextLine();
+			System.out.println("Reading = "+line);
+			_line= line.split(",");
+			// 2 = docType, 3 id
+			 System.out.println("_line length "+ _line.length);
+			System.out.println("2 = " + _line[2] + " 3 = " + _line[3]);
+			Solution2.missingDoc(_line[doc_type_index], Integer.parseInt(_line[app_id_index]));
+		}
+		Solution2.printMissingDocs();
+
+	}
+}

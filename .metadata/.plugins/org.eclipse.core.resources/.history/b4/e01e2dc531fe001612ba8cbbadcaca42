@@ -1,0 +1,15 @@
+package ListAndQueue;
+
+public class Node<T> {
+	private T val;
+	Node <T> next;
+	Node<T> previous;
+	
+	public Node(T val, Node prev,Node next){
+		this.val = val;
+		this.previous = prev;
+		this.next = next;
+	}
+	
+
+}

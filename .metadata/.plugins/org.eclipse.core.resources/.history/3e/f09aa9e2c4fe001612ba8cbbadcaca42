@@ -1,0 +1,112 @@
+import java.util.Random;
+
+public class MedianOfDataStream {
+	Node root = null;
+	int size = 0;
+	int median_loc = 0;
+	int median;
+
+	public void RandomGenerator() {
+		Random r = new Random();
+		for (int i = 0; i < 5; i++) {
+			int curr = r.nextInt();
+			this.putValue(curr);
+			this.MedianCalculator(curr);
+			System.out.println("");
+		}
+	}
+
+	public void MedianCalculator(int a) {
+		if (size == 1) {
+			median_loc = 0;
+			median = a;
+		}
+		if (size % 2 == 0) {
+			if (a <= median) {
+				median_loc = median - 1;
+				median = this.getMedian(root, median_loc);
+			} else {
+				median = this.getMedian(root, median_loc);
+			}
+
+		} else {
+			if (a <= median) {
+				// median_loc = median-1;
+				median = this.getMedian(root, median_loc);
+			} else {
+				median_loc = median + 1;
+				median = this.getMedian(root, median_loc);
+			}
+
+		}
+		System.out.print("[ ");
+		this.printTree(root);
+		System.out.println();
+		System.out.println("median is "+median);
+
+	}
+
+	public Integer getMedian(Node root, int loc) {
+		int count = loc;
+		while (loc >= 0) {
+			if (root == null) {
+				return null;
+			} else {
+				getMedian(root.left, count);
+				getMedian(root.right, count);
+				count--;
+			}
+		}
+
+		return root.data;
+	}
+
+	public void putValue(int c) {
+		size++;
+		if (root == null) {
+			root = new Node(c);
+		} else {
+			Node curr = root;
+			Node parent = root;
+			boolean left = true;
+			while (curr != null) {
+				if (c <= parent.data) {
+					parent = curr;
+					curr = curr.left;
+					left = true;
+				} else {
+					parent = curr;
+					curr = curr.right;
+					left = false;
+				}
+			}
+			curr = new Node(c);
+			if (left) {
+				parent.left = curr;
+			} else {
+				parent.right = curr;
+			}
+
+		}
+	}
+	
+	
+	public void printTree(Node root){
+		if(root == null){
+			return;
+		}
+		else{
+			printTree(root.left);
+			System.out.print(root.data+" ");
+			printTree(root.right);
+		}
+		System.out.print("]");
+		System.out.println();
+	}
+	public static void main(String[] args){
+		MedianOfDataStream o = new MedianOfDataStream();
+		o.RandomGenerator();
+		
+	}
+
+}

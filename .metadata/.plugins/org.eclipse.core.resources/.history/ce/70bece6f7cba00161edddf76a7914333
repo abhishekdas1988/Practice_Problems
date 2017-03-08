@@ -1,0 +1,5 @@
+class Solution {
+    public int solution(String S) {
+        // write your code in Java SE 8
+    }
+}

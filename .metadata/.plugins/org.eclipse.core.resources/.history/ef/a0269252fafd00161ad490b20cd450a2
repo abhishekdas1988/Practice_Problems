@@ -1,0 +1,35 @@
+import java.util.Random;
+import java.util.*;
+public class PhoneDir {
+	String[] curr = {"0","0","abc","def","ghi","jkl","mno","pqrs","tuvw","xyz"};
+	List<String> val = new LinkedList<String>();
+
+	public String getCombo(String input){
+		String[] in_arr = new String[input.length()];
+		int i;
+		for(i = 0;i< input.length()-1;i++){
+			in_arr[i]= input.substring(i, i+1);
+		}
+		this.Combo("",in_arr[i]);
+		return null;
+	}
+	public void Combo(String prefix,String s){
+		int n = s.length();
+		if(n==0){
+			this.val.add(prefix);
+		}
+		else{
+			for(int i=0;i<n;i++){
+				this.Combo(prefix+s.charAt(i),s.substring(0, i)+s.substring(i+1,n) );
+			}
+		}
+		
+//		
+
+	}
+	
+	public static void main(String[] args){
+		new PhoneDir().getCombo("abc");
+	}
+
+}

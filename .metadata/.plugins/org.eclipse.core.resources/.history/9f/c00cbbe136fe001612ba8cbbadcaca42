@@ -1,0 +1,14 @@
+package ListAndQueue;
+
+
+public class TNode {
+	int data;
+	Node left;
+	Node right;
+	public TNode(int n){
+		this.data = n;
+		this.left = null;
+		this.right = null;
+	}
+	// reflection
+}

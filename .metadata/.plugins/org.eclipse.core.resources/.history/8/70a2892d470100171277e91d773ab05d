@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+
+public class Solution2 {
+  public static void missingDoc(){
+	  
+	  
+  }
+    public static void main(String args[] ) throws Exception {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    Scanner s  = new Scanner(System.in);
+    String line;
+    while(s.hasNext()){
+    	line = s.next();
+    	System.out.println(line);
+    }
+    
+    
+    
+    }
+}

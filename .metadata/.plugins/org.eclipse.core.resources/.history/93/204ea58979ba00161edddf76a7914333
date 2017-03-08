@@ -1,0 +1,25 @@
+import java.util.HashSet;
+import java.util.Random;
+class Solution {
+	int size=0;
+	int start_index = 0;
+	HashSet<Integer> visited = new HashSet<Integer>();
+    public int solution(int[] A) {
+    	// Starting with mid element
+    	// Assume that Size of the array as the start point
+    	this.size=A.length;
+    	while (true){
+    		int current = this.rand();
+    		if(!this.visited.contains(current)){
+    			
+    		}
+    	}
+    	
+		return 0;
+        // write your code in Java SE 8
+    }
+    public int rand(){
+    	Random rand = new Random();
+    	return (rand.nextInt(this.size - start_index)+start_index);   	
+    }
+}

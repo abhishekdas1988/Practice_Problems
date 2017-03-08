@@ -1,0 +1,21 @@
+package bloomberg;
+import java.util.ArrayList;
+
+public class PowerSet {
+	public void sortString(){}
+	public void powerSet(String s){
+		StringBuilder given = new StringBuilder(s);
+		int length = given.length();
+		ArrayList<String> list = new ArrayList<String>();
+		for(int i = 0;i<length;i++){
+			list.add(given.charAt(i).toString());
+		}
+		for(double i = 0;i<(Math.pow(2,(double)length));i++){
+			Stringbuilder
+		}
+	}
+	public static void main(String[] args){
+		
+	}
+
+}
